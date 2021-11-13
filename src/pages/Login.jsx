@@ -19,6 +19,7 @@ class Login extends React.Component {
     this.setState({ value: event.target.value });
   }
 
+  // Essa função foi baseada no projeto do Rivaldo
   async saveUser(val) {
     this.setState({ loading: true });
     await createUser({ name: val });
