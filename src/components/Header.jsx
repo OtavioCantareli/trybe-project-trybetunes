@@ -1,13 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import Loading from '../pages/Loading';
 
 export default class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userName: '',
+    };
+  }
+
   componentDidMount() {
-    return getUser();
+    this.name();
+  }
+
+  name() {
+    getUser().then((user) => {
+      this.setState({ userName: user.name });
+    });
   }
 
   render() {
+    const { userName } = this.state;
     return (
       <header data-testid="header-component">
         <Link to="/search" data-testid="link-to-search">
@@ -19,7 +34,11 @@ export default class Header extends React.Component {
         <Link to="/profile" data-testid="link-to-profile">
           Perfil
         </Link>
-        {/* <span data-testid="header-user-name">{() => getUser()}</span> */}
+        {userName === '' ? (
+          <Loading />
+        ) : (
+          <span data-testid="header-user-name">{userName}</span>
+        )}
       </header>
     );
   }
