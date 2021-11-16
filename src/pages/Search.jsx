@@ -24,7 +24,6 @@ export default class Search extends React.Component {
   }
 
   search() {
-    // this.setState({ value: '' });
     const { value } = this.state;
     this.setState({ isLoading: true });
     searchAlbumsAPI(value).then((results) => {
