@@ -41,11 +41,17 @@ export default class Album extends React.Component {
         <Header />
         <span data-testid="artist-name">{name}</span>
         <p data-testid="album-name">{title}</p>
-        {songList.map(({ trackName, previewUrl, trackId }, index) => {
+        {songList.map((songs, index) => {
+          const { trackName, previewUrl, trackId } = songs;
           if (index !== 0) {
             return (
               <div key={ trackId }>
-                <MusicCard trackName={ trackName } previewUrl={ previewUrl } />
+                <MusicCard
+                  trackName={ trackName }
+                  previewUrl={ previewUrl }
+                  trackId={ trackId }
+                  songs={ songs }
+                />
               </div>
             );
           }
